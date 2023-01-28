@@ -1,4 +1,7 @@
 # rpy-dialog
+
+Parses dialog from an [extracted](https://github.com/Shizmob/rpatool) and [decompiled](https://github.com/CensoredUsername/unrpyc) Ren'Py archive and outputs it as JSON.
+
 Usage:
 ```console
 python rpy-dialog --output dialog.json ./extracted-rpa-dir

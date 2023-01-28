@@ -47,7 +47,7 @@ def parse_characters(lines: list) -> dict:
         lines (list): Lines of rpy script
 
     Returns:
-        dict: _description_
+        dict: Dictionary that maps character ids to names.
     """
 
     definitions = filter(lambda x: x.startswith('define'), lines)
@@ -65,10 +65,10 @@ def extract_labels(lines: list) -> dict:
     """Store labels and lines under them in a dictionary.
 
     Args:
-        lines (list): _description_
+        lines (list): Lines of rpy script
 
     Returns:
-        dict: _description_
+        dict: Dictionary that maps label names to lists of corresponding lines
     """
 
     in_label = None
@@ -94,6 +94,16 @@ def extract_labels(lines: list) -> dict:
 
 
 def parse_dialog(labels: dict, characters: dict) -> list:
+    """Parse dialog from the given labels with the specified set of characters
+
+    Args:
+        labels (dict): Dictionary of label names to line lists
+        characters (dict): Dictionary of character ids to names
+
+    Returns:
+        list: List of messages.
+    """
+
     messages = []
     for (label, lines) in labels.items():
         for line in lines:
@@ -115,6 +125,7 @@ def parse_dialog(labels: dict, characters: dict) -> list:
                 character = characters[result.group(1)]
                 utterance = result.group(2)
             messages.append({'speaker': character, 'utterance': utterance})
+    
     return messages
 
 
